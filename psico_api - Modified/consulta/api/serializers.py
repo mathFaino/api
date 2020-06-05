@@ -11,7 +11,7 @@ class ConsultaSerializer(ModelSerializer):
 
     class Meta:
         model = Consulta
-        fields = ('id', 'data', 'video', 'video_teste', 'relatorio', 'sono_alterado', 'peso_alterado', 'apetite_alterado', 'paciente',
+        fields = ('id', 'data', 'video', 'relatorio', 'sono_alterado', 'peso_alterado', 'apetite_alterado', 'paciente',
                   'especialista', 'analise_video')
 
     '''def create(self, validated_data):
@@ -28,5 +28,5 @@ class ConsultaSerializerCreate(ModelSerializer):
 
     class Meta:
         model = Consulta
-        fields = ('id', 'data', 'video', 'video_teste', 'relatorio', 'sono_alterado', 'peso_alterado', 'apetite_alterado', 'paciente',
+        fields = ('id', 'data', 'video', 'relatorio', 'sono_alterado', 'peso_alterado', 'apetite_alterado', 'paciente',
                   'especialista', 'analise_video')
