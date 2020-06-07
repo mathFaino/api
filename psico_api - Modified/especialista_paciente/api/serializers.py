@@ -14,6 +14,7 @@ class EspecialistaPacienteSerializer(ModelSerializer):
     def create(self, validated_data):
         paciente = validated_data['paciente']
         # del validated_data['paciente']
+        print(validated_data)
 
         paci = Paciente.objects.create(**paciente)
 
