@@ -5,13 +5,11 @@ from pathlib import Path
 
 
 class AnaliseVideoSerializer(serializers.ModelSerializer):
-    video = serializers.CharField()
 
     class Meta:
         model = AnaliseVideo
         fields = ('id', 'possivel_depressao', 'porcentagem_emocao1', 'porcentagem_emocao2',
                   'porcentagem_emocao3', 'data', 'video')
-        # read_only_fields = ['__all__']
         write_only_fields = ['__all__']
 
     def create(self, validated_data):
@@ -20,22 +18,23 @@ class AnaliseVideoSerializer(serializers.ModelSerializer):
         video = validated_data['video']
         video = video.split('videos')
 
+        validated_data['video'] = None
+
         reconhecer_obj = reconhecer.Reconhecer(caminho + video[1])
         result = reconhecer_obj.realizar_reconhecimento()
 
         emocoes = self.top_three(result)
-
+        print(emocoes)
         validated_data['porcentagem_emocao1'] = emocoes[0]
         validated_data['porcentagem_emocao2'] = emocoes[1]
         validated_data['porcentagem_emocao3'] = emocoes[2]
 
-        if validated_data['porcentagem_emocao1'].find('Triste'):
+        if validated_data['porcentagem_emocao1'].find('Triste%'):
             validated_data['possivel_depressao'] = True
         else:
             validated_data['possivel_depressao'] = False
         analise_video = AnaliseVideo.objects.create(**validated_data)
         analise_video.save()
-
         return analise_video
 
     def top_three(self, map_sended):
@@ -56,5 +55,13 @@ class AnaliseVideoSerializer(serializers.ModelSerializer):
             pos.append(original_list.index(a))
 
         for b in pos:
-            lista_emotions.append((map_sended[b][0] + map_sended[b][1]))
+            lista_emotions.append((map_sended[b][0] + ' ' + map_sended[b][1]))
         return lista_emotions
+
+
+class AnaliseVideoReadSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = AnaliseVideo
+        fields = ('id', 'possivel_depressao', 'porcentagem_emocao1', 'porcentagem_emocao2',
+                  'porcentagem_emocao3', 'data')
