@@ -1,19 +1,22 @@
 from rest_framework import serializers
 from analise_video.models import AnaliseVideo
 import reconhece.reconhecer as reconhecer
+from pathlib import Path
 
 
 class AnaliseVideoSerializer(serializers.ModelSerializer):
-    video = serializers.CharField(read_only=True)
+    video = serializers.CharField()
 
     class Meta:
         model = AnaliseVideo
         fields = ('id', 'possivel_depressao', 'porcentagem_emocao1', 'porcentagem_emocao2',
                   'porcentagem_emocao3', 'data', 'video')
-        read_only_fields = ['__all__']
+        # read_only_fields = ['__all__']
+        write_only_fields = ['__all__']
 
     def create(self, validated_data):
-        caminho = '../../media_images/videos/'
+        home = Path.cwd()
+        caminho = str(home) + '/media_images/videos/'
         video = validated_data['video']
         video = video.split('videos')
 
@@ -25,6 +28,15 @@ class AnaliseVideoSerializer(serializers.ModelSerializer):
         validated_data['porcentagem_emocao1'] = emocoes[0]
         validated_data['porcentagem_emocao2'] = emocoes[1]
         validated_data['porcentagem_emocao3'] = emocoes[2]
+
+        if validated_data['porcentagem_emocao1'].find('Triste'):
+            validated_data['possivel_depressao'] = True
+        else:
+            validated_data['possivel_depressao'] = False
+        analise_video = AnaliseVideo.objects.create(**validated_data)
+        analise_video.save()
+
+        return analise_video
 
     def top_three(self, map_sended):
         lista = []

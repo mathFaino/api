@@ -1,11 +1,10 @@
 import cv2
 import dlib
 import numpy as np
-import pandas as pd
-import tensorflow
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import img_to_array
 import os
+from pathlib import Path
 
 
 class Reconhecer:
@@ -95,7 +94,8 @@ class Reconhecer:
 
     @staticmethod
     def carregar_modelo():
-        modelo = "modelos/modelo_01_expressoes.h5"
+        caminho = Path.cwd()
+        modelo = str(caminho) + "/reconhece/modelos/modelo_01_expressoes.h5"
         carregado = load_model(modelo, compile=False)
         return carregado
 

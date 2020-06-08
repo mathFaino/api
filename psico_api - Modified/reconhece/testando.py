@@ -1,4 +1,5 @@
 import reconhece.reconhecer as reconhecer
+from pathlib import Path
 
 
 def top_three(map_sended):
@@ -28,10 +29,19 @@ list1 = top_three(map_test)
 # list1 = top_three([2, 3, 5, 16, 8, 4, 2, 1])
 print(list1)
 
-dictionary = {'a': '1'}
-dictionary['b'] = 2
+dictionary = {'a': '1', 'b': '2'}
 print(dictionary)
+teste = dictionary.keys()
 
+t = ''
+for c in dictionary:
+    t = c
+    break
+print(t)
+
+
+print(Path.home())
+print(Path.cwd())
 '''
 caminho = '../media_images/videos/'
 video = 'http://127.0.0.1:8000/media_files/videos/meu_video.mp4'
