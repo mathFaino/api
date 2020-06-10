@@ -43,7 +43,7 @@ class AnaliseVideoSerializer(serializers.ModelSerializer):
         pos = []
         lista_emotions = []
         while contador <= (len(map_sended) - 1):
-            lista.append(map_sended[contador][1])
+            lista.append(float(map_sended[contador][1]))
             contador += 1
         original_list = lista.copy()
         lista.sort()

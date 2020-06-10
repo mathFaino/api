@@ -8,19 +8,22 @@ def top_three(map_sended):
     pos = []
     lista_emotions = []
     while contador <= (len(map_sended) - 1):
-        lista.append(map_sended[contador][1])
+        lista.append(int(map_sended[contador][1]))
         contador += 1
+    print(lista)
     original_list = lista.copy()
+    print(original_list)
     lista.sort()
+    print(lista)
     tops = lista[-3:]
     q = sorted(tops, reverse=True)
-
+    print(q)
     for a in q:
         print(a)
         pos.append(original_list.index(a))
 
     for b in pos:
-        lista_emotions.append((map_sended[b][0] + map_sended[b][1]))
+        lista_emotions.append((map_sended[b][0] + ' ' + map_sended[b][1]))
     return lista_emotions
 
 

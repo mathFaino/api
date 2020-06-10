@@ -89,7 +89,6 @@ class Reconhecer:
         roi = roi / 255
         roi = img_to_array(roi)
         roi = np.expand_dims(roi, axis=0)
-
         return roi
 
     @staticmethod
@@ -101,13 +100,10 @@ class Reconhecer:
 
     @staticmethod
     def calcular_media_emocoes(med_prob, quant_frames, num_faces, expressoes):
-
         result_prob = []
         emocoes = []
-
         for cont, val in enumerate(med_prob):
             result_prob.append(val / quant_frames)
-
         if len(num_faces) == 1:
             for (i, (emotion, prob)) in enumerate(zip(expressoes, result_prob)):
                 text = "{}: {:.2f}%".format(emotion, prob)
