@@ -4,6 +4,7 @@ from paciente.models import Paciente
 
 
 class Especialista(models.Model):
+    nome = models.CharField(max_length=100)
     CRP = models.CharField(max_length=8, null=True, blank=True)
     CRM = models.CharField(max_length=10, null=True, blank=True)
     CPF = models.CharField(max_length=11)

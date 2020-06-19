@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.filters import SearchFilter
 from rest_framework.permissions import IsAuthenticated
@@ -11,5 +12,5 @@ class EspecialistaViewSet(ModelViewSet):
     # authentication_classes = (TokenAuthentication,)
     queryset = Especialista.objects.all()
     serializer_class = EspecialistaSerializer
-    filter_backends = (SearchFilter,)
-    search_fields = ('CPF',)
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('usuario',)
