@@ -12,7 +12,7 @@ class Especialista(models.Model):
     telefone = models.BigIntegerField()
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     paci = models.ManyToManyField(Paciente)
-    imagem_perfil = models.ImageField(upload_to="imagens", null=True, blank=True)
+    imagem_perfil = models.FileField(upload_to='imagens', null=True, blank=True)
 
     def __str__(self):
         return str(self.pk)

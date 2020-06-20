@@ -9,5 +9,7 @@ class EspecialistaSerializer(ModelSerializer):
 
     class Meta:
         model = Especialista
-        fields = ('id', 'nome', 'usuario', 'imagem_perfil', 'CRP', 'CRM', 'CPF', 'email', 'telefone', 'atende')
+        fields = ('id', 'nome', 'usuario'
+                  ,'imagem_perfil'
+                  , 'CRP', 'CRM', 'CPF', 'email', 'telefone', 'atende')
 
