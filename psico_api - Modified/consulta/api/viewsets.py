@@ -14,7 +14,7 @@ class ConsultaViewSet(ModelViewSet):
     serializer_class = ConsultaSerializer
     filter_backends = (SearchFilter, DjangoFilterBackend)
     search_fields = ('data',)
-    filter_fields = ('paciente',)
+    filter_fields = ('paciente', 'especialista')
 
     def get_serializer_class(self):
         actions = [
